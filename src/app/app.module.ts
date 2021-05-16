@@ -13,6 +13,7 @@ import { CityDetailsComponent } from './components/city-details/city-details.com
 import { WeatherService } from './weather.service';
 import { HttpClientModule } from '@angular/common/http';
 import { KelvinPipe } from './kelvin.pipe';
+import { FightDataService } from './fight-data.service';
 
 @NgModule({
   imports: [BrowserModule, FormsModule, AppRoutingModule, HttpClientModule],
@@ -27,6 +28,6 @@ import { KelvinPipe } from './kelvin.pipe';
     KelvinPipe
   ],
   bootstrap: [AppComponent],
-  providers: [WeatherService]
+  providers: [WeatherService, FightDataService]
 })
 export class AppModule {}

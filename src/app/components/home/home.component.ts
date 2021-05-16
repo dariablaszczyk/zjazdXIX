@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { FightDataService } from 'src/app/fight-data.service';
 import { WeatherService } from '../../weather.service';
+
+
 
 @Component({
   selector: 'app-home',
@@ -10,14 +13,31 @@ import { WeatherService } from '../../weather.service';
 })
 export class HomeComponent implements OnInit {
   origin = new FormControl('');
+  flightInfo: any;
+  departureDate: any;
+  returnDate: any;
+  originCity: any;
+  destinationCity: any;
+  message: any;
 
-  constructor(private router: Router, private weatherService: WeatherService) {}
+  constructor(private router: Router, private weatherService: WeatherService, private flightDataService: FightDataService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.flightDataService.currentMessage.subscribe(message => this.message = message)
+  }
 
   call1() {
     this.router.navigate(['/login']);
+    this.flightInfo = [
+      this.originCity,
+      this.destinationCity,
+      this.departureDate,
+      this.returnDate
+    ];
+    console.log(this.flightInfo);
+    this.flightDataService.changeMessage(this.flightInfo);
   }
+
 
   options = true;
   minDate: Date = new Date();
@@ -55,6 +75,18 @@ export class HomeComponent implements OnInit {
       name: 'Nowy Jork',
       url:
         'https://gfx.radiozet.pl/var/radiozet/storage/images/podroze-radia-zet/nowy-jork-co-warto-zobaczyc-10-najwiekszych-atrakcji-nowego-jorku/1766637-1-pol-PL/Nowy-Jork-co-warto-zobaczyc-10-najwiekszych-atrakcji-Nowego-Jorku_article.webp'
+    },
+    {
+      id: 6,
+      name: 'Miami',
+      url:
+        'https://media.istockphoto.com/photos/mornings-over-miami-beach-picture-id1023093528?k=6&m=1023093528&s=612x612&w=0&h=Y5vNGbeQIEHE_bwm507V6N8gqAdT5pktUhG5qMUKpuw='
+    },
+    {
+      id: 7,
+      name: 'Kair',
+      url:
+        'https://media.istockphoto.com/photos/mornings-over-miami-beach-picture-id1023093528?k=6&m=1023093528&s=612x612&w=0&h=Y5vNGbeQIEHE_bwm507V6N8gqAdT5pktUhG5qMUKpuw='
     }
   ];
 
@@ -69,12 +101,21 @@ export class HomeComponent implements OnInit {
 
   selectedCity: any;
   temperature: number;
+  emoticon: any;
 
   showTemp() {
     this.weatherService.city = this.selectedCity;
     this.weatherService.getWeather().subscribe(result => {
       console.log(result);
       this.temperature = Object(result).main.temp;
-    });
+      this.emoticon = Object(result).weather[0].main;
+      if (this.emoticon == 'Clouds') {
+        this.emoticon = "☁️"
+      } if (this.emoticon == 'Clear') {
+        this.emoticon = "☀️"
+      }
+      })
+    }
+
+
   }
-}

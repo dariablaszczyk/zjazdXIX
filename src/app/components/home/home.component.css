@@ -28,3 +28,8 @@ button {
     width: 90vw;
   }
 }
+
+.alert {
+  color: red;
+  background-color: silver;
+}
