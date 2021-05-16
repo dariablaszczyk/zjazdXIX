@@ -1,0 +1,13 @@
+<h2>City details:</h2>
+
+<p>{{name}}</p>
+<p>{{id}}</p>
+
+<div *ngIf="name == 'Katowice'">Info o Katowicach</div>
+<div *ngIf="name == 'Poznań'">Info o Poznaniu</div>
+<div *ngIf="name == 'Warszawa'">Info o Warszawie</div>
+<div *ngIf="name == 'Sztokholm'">Info o Sztokholmie</div>
+<div *ngIf="name == 'Paryż'">Info o Paryżu</div>
+<div *ngIf="name == 'Nowy Jork'">Info o Nowym Yorku</div>
+
+<a routerLink="/home">Powrót do strony głównej</a>

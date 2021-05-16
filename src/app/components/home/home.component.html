@@ -1,0 +1,54 @@
+<button (click)="call1()"> Przejdź do strony logowania: </button>
+
+<form>
+
+  <input type="radio" [(ngModel)]="options" name="oneway" id="oneway" [value]="true" [checked]="options">
+  <label for="oneway">W jedną stronę</label><br>
+  <input type="radio" [(ngModel)]="options" name="twoway" id="twoway" [value]="false" [checked]="!options">
+  <label for="twoway">W dwie strony</label>
+
+  <br><br>
+
+  <div *ngIf="options; then onewayForm else twowayForm"></div>
+
+  <ng-template #onewayForm>
+    <label for="depatureDate">Data wylotu - podroz w jedną stronę: </label>
+    <input type="date" name="depatureDate" id="depatureDate" min="{{minDate|date:'yyyy-MM-dd'}}">
+  </ng-template>
+
+  <ng-template #twowayForm>
+    <label for="depatureDate">Data wylotu - podroz w dwie strony: </label>
+    <input type="date" name="depatureDate" id="depatureDate" min="{{minDate|date:'yyyy-MM-dd'}}"><br>
+    <label for="returnDate">Data przylotu - podroz w dwie strony:</label>
+    <input type="date" name="returnDate" id="returnDate">
+  </ng-template>
+
+  <br><br>
+
+  <label for="origin">Miejsce wylotu: </label>
+  <select name="origin" id="origin" [(ngModel)]="selectedCity" >
+  <option *ngFor="let item of cities">{{item.name}}</option>
+  </select>
+
+  <br><br>
+
+  <label for="destination">Miejsce przylotu: </label>
+  <select name="destination" id="destination">
+  <option *ngFor="let item of destinationsArray">{{item.name}}</option>
+  </select>
+
+</form>
+
+
+<button (click)="showTemp()">Pokaz temperature</button>
+
+Temperatura: {{temperature | kelvin | number: '.1-2'}} stopni C
+
+
+
+
+<!-- <div class="container">
+  <div *ngFor="let city of cities" (click)="showDetails(city)" style="background-image: url({{city.url}});   background-position: center;
+  background-size: cover;" class="box">
+    {{ city.name }}</div>
+</div> -->

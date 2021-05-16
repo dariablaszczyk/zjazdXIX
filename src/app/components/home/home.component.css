@@ -1,0 +1,30 @@
+button {
+  display: block;
+}
+
+.box {
+  width: 30vw;
+  height: 30vw;
+  color: white;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 1px;
+  padding: 0;
+  border: 1px solid black;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  position: fixed;
+  bottom: 11%;
+}
+
+@media (max-width: 480px) {
+  .box {
+    width: 90vw;
+  }
+}

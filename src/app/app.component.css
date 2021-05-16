@@ -1,0 +1,14 @@
+p {
+  font-family: Lato;
+}
+
+.footer {
+  position: fixed;
+  height: 10%;
+  bottom: 0;
+  width: 100%;
+  background-color: whitesmoke;
+  border-top: 1px solid black;
+  text-align: center;
+  color: black;
+}
